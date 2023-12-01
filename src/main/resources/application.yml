@@ -1,0 +1,35 @@
+server:
+  port: 8081
+
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIAX5XSI5UTUOMGM5F3
+      secretKey: 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
+    region:
+      static: ap-south-1
+    stack:
+      auto: false
+
+spring:
+  devtools:
+    restart:
+      enabled: true
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+      format_sql: true
+
+  datasource:
+    url: "jdbc:mysql://localhost:3306/test"
+    username: root
+    password: root
+
+  task:
+    execution:
+      thread-name-prefix: testserver-async-
+      pool:
+        core-size: 2
+        max-size: 3
+        queue-capacity: 100
