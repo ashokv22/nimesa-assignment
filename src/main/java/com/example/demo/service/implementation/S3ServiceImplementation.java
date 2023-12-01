@@ -46,6 +46,11 @@ public class S3ServiceImplementation implements S3Service {
 
     @Autowired private S3BucketObjectRepository s3BucketObjectRepository;
 
+    /**
+     * Generates a unique JobId for this discovery job and initializes a new Job object.
+     *
+     * @return A Job object representing the newly initialized job.
+     */
     @Override
     public Job intitlizeJob() {
         // Generate a unique JobId for this discovery job
@@ -109,6 +114,12 @@ public class S3ServiceImplementation implements S3Service {
         }
     }
 
+    /**
+     * Retrieves the result of a job with the given job ID.
+     *
+     * @param  jobId  the ID of the job to retrieve the result for
+     * @return        a CompletableFuture containing the result of the job, represented as a String
+     */
     @Override
     public CompletableFuture<String> getJobResult(String jobId) {
         Optional<Job> jobOptional = jobRepository.findById(jobId);
@@ -119,6 +130,12 @@ public class S3ServiceImplementation implements S3Service {
         return CompletableFuture.completedFuture("Job Not Found");
     }
 
+    /**
+     * Retrieves the discovery result for a given service.
+     *
+     * @param  service   the name of the service to retrieve the discovery result for
+     * @return           a CompletableFuture containing a list of strings representing the discovery result
+     */
     @Override
     public CompletableFuture<List<String>> getDiscoveryResult(String service) {
         if (service.equalsIgnoreCase("s3")) {
@@ -133,6 +150,12 @@ public class S3ServiceImplementation implements S3Service {
         return CompletableFuture.completedFuture(new ArrayList<>());
     }
 
+    /**
+     * Retrieves the objects in the specified S3 bucket asynchronously.
+     *
+     * @param  job         the job object representing the current job
+     * @param  bucketName  the name of the S3 bucket
+     */
     @Async
     @Override
     public void getS3BucketObjects(Job job, String bucketName) {
@@ -167,6 +190,12 @@ public class S3ServiceImplementation implements S3Service {
         }
     }
 
+    /**
+     * Retrieves the count of objects in the specified S3 bucket.
+     *
+     * @param  bucketName  the name of the S3 bucket
+     * @return             the count of objects in the S3 bucket
+     */
     @Override
     public Integer getS3BucketObjectCount(String bucketName) {
         int bucketObjectsCount = s3BucketObjectRepository.countByBucketName(bucketName);
@@ -174,6 +203,13 @@ public class S3ServiceImplementation implements S3Service {
         return bucketObjectsCount;
     }
 
+    /**
+     * Retrieves a list of S3 bucket objects that match a given pattern.
+     *
+     * @param  bucketName   the name of the S3 bucket
+     * @param  pattern      the pattern to match against the file names
+     * @return              a list of S3 bucket objects that match the pattern
+     */
     @Override
     public List<String> getS3BucketObjectLike(String bucketName, String pattern) {
         return s3BucketObjectRepository.findByBucketNameAndFileNamesLike(bucketName, pattern);
