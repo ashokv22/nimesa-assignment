@@ -1,4 +1,4 @@
-# S3 Service API Documentation
+# Nimesa Assignment API Documentation
 
 This Spring Boot application exposes a set of REST APIs for discovering EC2 instances and S3 buckets, retrieving job results, and querying S3 bucket objects.
 
@@ -80,7 +80,7 @@ This Spring Boot application exposes a set of REST APIs for discovering EC2 inst
 
 1. Clone the repository.
 2. Build and run the Spring Boot application.
-3. Use any API testing tool or `curl` commands to interact with the provided endpoints.
+3. Postman collection included in the Repository. Import `Nimesa Assignment API Documentation.postman_collection.json` in postman and test them out.
 
 ## Dependencies
 
