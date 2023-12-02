@@ -93,7 +93,7 @@ This Spring Boot application exposes a set of REST APIs for discovering EC2 inst
 ## Configuration
 
 - Update the `application.yml` file with your AWS credentials and database configuration.
-
+- Run the `init.sql` script for to create the tables
 ## Build and Run
 
 ```bash
